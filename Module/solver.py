@@ -6,7 +6,7 @@ carb = float(input("Enter carb : "))
 fats = float(input("Enter fats : "))
 fiber = float(input("Enter fiber : "))
 
-target_matrix = [protein,carb,fats,fiber]
+target_matrix = [[protein],[carb],[fats],[fiber]]
 
 def load_ingredients(path):
     #matrix = np.genfromtxt(path, delimiter=',', skip_header=1, usecols=(1, 2, 3, 4))
