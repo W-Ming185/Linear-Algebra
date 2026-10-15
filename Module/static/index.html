@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smoothie Recipe Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-serif-italic { font-family: 'Lora', serif; font-style: italic; }
+        .custom-scrollbar::-webkit-scrollbar { height: 6px; width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f8fafc; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800 p-4 md:p-8 flex flex-col items-center">
+
+    <main class="w-full max-w-5xl flex flex-col gap-6 mt-2">
+        <div class="text-center mb-2">
+            <h1 class="text-3xl font-bold text-slate-800">Smoothie Recipe Calculator</h1>
+            <p class="text-sm text-slate-500 mt-2">Design your perfect blend and track its nutrition.</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 md:p-8">
+
+            <!-- Section 1: Targets -->
+            <div class="mb-6">
+                <h2 class="text-sm font-bold text-slate-700 mb-4 uppercase tracking-wider">1. Target Macros &amp; Goals</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="flex flex-col gap-1">
+                        <label class="text-xs font-medium text-slate-600">Target Protein (g)</label>
+                        <input id="tProtein" type="number" min="0" step="any" placeholder="e.g. 30" class="w-full border border-slate-200 rounded-md p-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none transition-all">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="text-xs font-medium text-slate-600">Target Carb (g)</label>
+                        <input id="tCarb" type="number" min="0" step="any" placeholder="e.g. 50" class="w-full border border-slate-200 rounded-md p-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none transition-all">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="text-xs font-medium text-slate-600">Target Fat (g)</label>
+                        <input id="tFat" type="number" min="0" step="any" placeholder="e.g. 10" class="w-full border border-slate-200 rounded-md p-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none transition-all">
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label class="text-xs font-medium text-slate-600">Target Fiber (g)</label>
+                        <input id="tFiber" type="number" min="0" step="any" placeholder="e.g. 8" class="w-full border border-slate-200 rounded-md p-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none transition-all">
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border-t border-slate-100 my-6">
+
+            <!-- Section 2: Add Ingredients -->
+            <div class="mb-6">
+                <h2 class="text-sm font-bold text-slate-700 mb-4 uppercase tracking-wider">2. Add Ingredients</h2>
+                <div class="flex flex-col md:flex-row gap-3 relative">
+                    <div class="flex-grow relative">
+                        <input type="text" id="ingName" autocomplete="off" placeholder="Search ingredient (e.g., Banana, Spinach, Yogurt...)"
+                            class="w-full border border-slate-200 rounded-md p-2.5 text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none transition-all">
+                        <div id="suggest" class="hidden absolute z-20 left-0 right-0 mt-1 bg-white border border-slate-200 rounded-md shadow-lg max-h-64 overflow-y-auto custom-scrollbar"></div>
+                    </div>
+                    <button id="addBtn" class="bg-red-600 hover:bg-red-700 text-white font-medium py-2.5 px-6 rounded-md shadow-sm transition-colors whitespace-nowrap">
+                        Add Ingredient
+                    </button>
+                </div>
+                <p id="addMsg" class="text-xs text-red-600 mt-2 h-4"></p>
+            </div>
+
+            <!-- Section 3: Input List -->
+            <div class="border border-slate-200 rounded-lg overflow-hidden bg-slate-50 min-h-[120px] max-h-[250px] overflow-y-auto custom-scrollbar">
+                <table class="w-full text-left text-sm whitespace-nowrap">
+                    <thead class="bg-slate-100 text-slate-600 sticky top-0 border-b border-slate-200">
+                        <tr>
+                            <th class="px-5 py-3 font-medium">Ingredient</th>
+                            <th class="px-5 py-3 font-medium text-right">Protein (/100g)</th>
+                            <th class="px-5 py-3 font-medium text-right">Carb (/100g)</th>
+                            <th class="px-5 py-3 font-medium text-right">Fat (/100g)</th>
+                            <th class="px-5 py-3 font-medium text-right">Fiber (/100g)</th>
+                            <th class="px-3 py-3"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="inputTableBody" class="divide-y divide-slate-200 text-slate-600 bg-white"></tbody>
+                </table>
+            </div>
+
+            <!-- Section 4: Calculate -->
+            <button id="calcBtn" class="w-full mt-6 bg-red-600 hover:bg-red-700 disabled:opacity-60 text-white font-bold py-3 px-6 rounded-md shadow-sm transition-colors flex justify-center items-center gap-2">
+                <span id="calcLabel">Calculate Recipe</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            </button>
+            <p id="calcMsg" class="text-sm text-red-600 mt-3 text-center"></p>
+        </div>
+
+        <div class="flex justify-center -my-2">
+            <svg class="w-8 h-8 text-slate-300 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+
+        <!-- Results -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden grid grid-cols-1 md:grid-cols-3 gap-0">
+
+            <div class="col-span-1 border-b md:border-b-0 md:border-r border-slate-100 p-8 flex flex-col items-center justify-center bg-slate-50/30">
+                <h3 class="text-red-700 font-serif-italic font-bold text-2xl mb-8 text-center">Your Smoothie</h3>
+                <div class="relative drop-shadow-md transform scale-110 mb-4">
+                    <svg width="100" height="150" viewBox="0 0 100 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="42" y="10" width="16" height="15" fill="#ef4444" rx="2" />
+                        <path d="M 25 25 Q 50 10 75 25 L 80 40 L 20 40 Z" fill="#334155" />
+                        <path d="M 22 40 L 28 130 C 29 145 71 145 72 130 L 78 40 Z" fill="#fca5a5" />
+                        <path d="M 22 40 L 24 75 C 50 80 76 75 78 40 Z" fill="#fde047" />
+                        <path d="M 28 130 C 29 145 50 145 50 130 L 46 40 L 22 40 L 28 130 Z" fill="rgba(0,0,0,0.05)" />
+                    </svg>
+                </div>
+                <div class="mt-4 flex flex-col items-center">
+                    <span class="text-xs font-bold text-slate-400 tracking-widest uppercase">Total Volume</span>
+                    <div class="mt-1 flex items-baseline gap-1">
+                        <span id="totalVolume" class="text-3xl font-bold text-slate-900">0</span>
+                        <span class="text-sm font-bold text-slate-500">g</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-span-1 md:col-span-2 p-6 md:p-8 flex flex-col gap-8 bg-white">
+                <div>
+                    <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider mb-4 border-b border-slate-100 pb-2">Recipe List</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="text-slate-500 border-b border-slate-100">
+                                <tr>
+                                    <th class="py-2 font-medium w-12">No.</th>
+                                    <th class="py-2 font-medium">Ingredient</th>
+                                    <th class="py-2 font-medium text-right">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recipeTableBody" class="divide-y divide-slate-50 text-slate-700">
+                                <tr><td colspan="3" class="py-6 text-center text-slate-400 italic text-sm">Click "Calculate Recipe" to see amounts.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="mt-auto">
+                    <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider mb-4 border-b border-slate-100 pb-2">Nutrition Summary</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                        <div class="bg-slate-50 rounded-lg p-4 flex flex-col items-center justify-center border border-slate-100">
+                            <span class="text-xs font-medium text-slate-500 mb-1">Calories (kcal)</span>
+                            <span id="outCal" class="text-xl font-bold text-slate-900">0</span>
+                        </div>
+                        <div class="bg-slate-50 rounded-lg p-4 flex flex-col items-center justify-center border border-slate-100">
+                            <span class="text-xs font-medium text-slate-500 mb-1">Protein (g)</span>
+                            <span id="outPro" class="text-xl font-bold text-slate-900">0</span>
+                        </div>
+                        <div class="bg-slate-50 rounded-lg p-4 flex flex-col items-center justify-center border border-slate-100">
+                            <span class="text-xs font-medium text-slate-500 mb-1">Carb (g)</span>
+                            <span id="outCarb" class="text-xl font-bold text-slate-900">0</span>
+                        </div>
+                        <div class="bg-slate-50 rounded-lg p-4 flex flex-col items-center justify-center border border-slate-100">
+                            <span class="text-xs font-medium text-slate-500 mb-1">Fat (g)</span>
+                            <span id="outFat" class="text-xl font-bold text-slate-900">0</span>
+                        </div>
+                        <div class="bg-slate-50 rounded-lg p-4 flex flex-col items-center justify-center border border-slate-100">
+                            <span class="text-xs font-medium text-slate-500 mb-1">Fiber (g)</span>
+                            <span id="outFiber" class="text-xl font-bold text-slate-900">0</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 flex items-center justify-between gap-3">
+                        <span class="text-slate-500 text-sm">Method: <span id="outMethod" class="font-semibold text-slate-700">-</span></span>
+                        <span class="text-slate-500 text-sm">Error: <span id="outError" class="font-semibold text-emerald-600">-</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let DB = [];
+        let chosen = [];   // ingredient objects, in the order added
+        let picked = null; // item currently highlighted from suggestions
+
+        const $ = id => document.getElementById(id);
+        const elInput = $('ingName'), elSuggest = $('suggest');
+
+        const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+
+        fetch('/api/ingredients').then(r => r.json()).then(d => { DB = d; });
+
+        function showSuggestions() {
+            const q = elInput.value.trim().toLowerCase();
+            picked = null;
+            if (!q) { elSuggest.classList.add('hidden'); return; }
+            const words = q.split(/\s+/);
+            const hits = DB.filter(i => words.every(w => i.name.toLowerCase().includes(w))).slice(0, 30);
+            if (!hits.length) {
+                elSuggest.innerHTML = '<div class="px-4 py-3 text-sm text-slate-400 italic">No match</div>';
+            } else {
+                elSuggest.innerHTML = hits.map(i =>
+                    `<div data-id="${i.id}" class="sg px-4 py-2 text-sm cursor-pointer hover:bg-red-50">${esc(i.name)}</div>`).join('');
+            }
+            elSuggest.classList.remove('hidden');
+        }
+
+        elInput.addEventListener('input', showSuggestions);
+        elInput.addEventListener('keydown', e => { if (e.key === 'Enter') addIngredient(); });
+        elSuggest.addEventListener('mousedown', e => {
+            const el = e.target.closest('.sg');
+            if (!el) return;
+            e.preventDefault();
+            const item = DB.find(i => i.id === +el.dataset.id);
+            elInput.value = item.name;
+            picked = item;
+            elSuggest.classList.add('hidden');
+        });
+        document.addEventListener('click', e => {
+            if (!elSuggest.contains(e.target) && e.target !== elInput) elSuggest.classList.add('hidden');
+        });
+
+        function addIngredient() {
+            const msg = $('addMsg'); msg.textContent = '';
+            const text = elInput.value.trim().toLowerCase();
+            if (!text) return;
+            let item = picked || DB.find(i => i.name.toLowerCase() === text);
+            if (!item) {
+                const words = text.split(/\s+/);
+                const hits = DB.filter(i => words.every(w => i.name.toLowerCase().includes(w)));
+                if (hits.length === 1) item = hits[0];
+                else { msg.textContent = hits.length ? 'Several matches - pick one from the list.' : 'No ingredient found with that name.'; return; }
+            }
+            if (chosen.some(c => c.id === item.id)) { msg.textContent = 'Already have that ingredient!'; return; }
+            chosen.push(item);
+            elInput.value = ''; picked = null; elSuggest.classList.add('hidden');
+            renderInputList();
+        }
+        $('addBtn').addEventListener('click', addIngredient);
+
+        function removeIngredient(id) { chosen = chosen.filter(c => c.id !== id); renderInputList(); }
+
+        function renderInputList() {
+            const tb = $('inputTableBody');
+            if (!chosen.length) {
+                tb.innerHTML = '<tr><td colspan="6" class="px-5 py-8 text-center text-slate-400 italic">No ingredients added yet.</td></tr>';
+                return;
+            }
+            tb.innerHTML = chosen.map(i => `
+                <tr>
+                    <td class="px-5 py-3 font-medium text-slate-700 whitespace-normal">${esc(i.name)}</td>
+                    <td class="px-5 py-3 text-right">${i.protein}</td>
+                    <td class="px-5 py-3 text-right">${i.carb}</td>
+                    <td class="px-5 py-3 text-right">${i.fat}</td>
+                    <td class="px-5 py-3 text-right">${i.fiber}</td>
+                    <td class="px-3 py-3 text-right"><button onclick="removeIngredient(${i.id})" class="text-slate-400 hover:text-red-600 text-lg leading-none" title="Remove">&times;</button></td>
+                </tr>`).join('');
+        }
+        renderInputList();
+
+        async function calculateRecipe() {
+            const msg = $('calcMsg'); msg.textContent = '';
+            const vals = { protein: $('tProtein').value, carb: $('tCarb').value, fat: $('tFat').value, fiber: $('tFiber').value };
+            for (const k in vals) {
+                if (vals[k] === '' || isNaN(+vals[k]) || +vals[k] < 0) { msg.textContent = 'Please fill in all four targets with numbers (0 or more).'; return; }
+            }
+            if (!chosen.length) { msg.textContent = 'Add at least one ingredient first.'; return; }
+
+            const btn = $('calcBtn'); btn.disabled = true; $('calcLabel').textContent = 'Calculating...';
+            try {
+                const r = await fetch('/api/solve', {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ ...vals, ids: chosen.map(c => c.id) })
+                });
+                const d = await r.json();
+                if (!d.ok) { msg.textContent = d.error + (d.detail ? ' ' + d.detail.split('\n').filter(Boolean).pop() : ''); return; }
+                showResult(d);
+            } catch (e) {
+                msg.textContent = 'Could not reach the server.';
+            } finally {
+                btn.disabled = false; $('calcLabel').textContent = 'Calculate Recipe';
+            }
+        }
+        $('calcBtn').addEventListener('click', calculateRecipe);
+
+        function showResult(d) {
+            let total = 0;
+            $('recipeTableBody').innerHTML = d.items.map((it, n) => {
+                total += it.grams;
+                return `<tr>
+                    <td class="py-3 text-slate-500">${n + 1}.</td>
+                    <td class="py-3 font-medium text-slate-800">${esc(it.name)}</td>
+                    <td class="py-3 text-right font-medium ${it.grams > 0 ? 'text-red-600' : 'text-slate-400'}">${it.grams} g</td>
+                </tr>`;
+            }).join('');
+            const t = d.totals;
+            $('totalVolume').textContent = Math.round(total);
+            $('outCal').textContent = Math.round(t.kcal ?? 0);
+            $('outPro').textContent = (t.protein ?? 0).toFixed(1);
+            $('outCarb').textContent = (t.carb ?? 0).toFixed(1);
+            $('outFat').textContent = (t.fat ?? 0).toFixed(1);
+            $('outFiber').textContent = (t.fiber ?? 0).toFixed(1);
+            $('outMethod').textContent = d.method === 'LS' ? 'Least squares (LS)' : d.method === 'NNLS' ? 'Non-negative LS (NNLS)' : (d.method || '-');
+            $('outError').textContent = d.error || '-';
+        }
+    </script>
+</body>
+</html>

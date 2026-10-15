@@ -5,11 +5,26 @@ protein = float(input("Enter protein : "))
 carb = float(input("Enter carb : "))
 fats = float(input("Enter fats : "))
 fiber = float(input("Enter fiber : "))
-ingredient = [0,1,2]
 target_matrix = [protein,carb,fats,fiber]
+ingredients = [0]
+
+while True:
+    Input = input("Enter your ingredient (type exit to exit) : ")
+    if Input.lower() == "exit":
+        if len(ingredients) <= 1:
+            print("you have to choose atleast one ingredient!")
+            continue
+        else:
+            break
+    if int(Input) in ingredients:
+        print("Already have those ingredient!")
+        continue
+
+    ingredients.append(int(Input))
+
 
 def print_result(x,error,path,ingredient):
-    df = pd.read_csv(path, sep='\t',skiprows=lambda x: x not in [0,9,98,7,48,50])
+    df = pd.read_csv(path, sep='\t',skiprows=lambda x: x not in ingredient)
     df = df.iloc[:, 1:7]
     
     total_protein = 0
@@ -28,6 +43,7 @@ def print_result(x,error,path,ingredient):
         total_fiber += weight*df.iloc[i,4]
         total_energy += weight*df.iloc[i,5]
     print(f"Error : {np.round(error,3)}")
+    print()
     print("Total :")
     print(f"Total_Protein : {round(total_protein,2)} g")
     print(f"Total Carb : {round(total_carb,2)} g")
@@ -37,16 +53,17 @@ def print_result(x,error,path,ingredient):
 
 def load_ingredients(path,ingredient_list):
     #matrix = np.genfromtxt(path, delimiter=',', skip_header=1, usecols=(1, 2, 3, 4))
-    df = pd.read_csv(path, sep='\t',skiprows=lambda x: x not in [0,9,98,7,48,50])
+    df = pd.read_csv(path, sep='\t',skiprows=lambda x: x not in ingredient_list)
     # .iloc[:, 1:] means "keep all rows (:), and keep columns from index 1 to the end"
     df = df.iloc[:, 2:6]
     print(df)
     matrix = df.to_numpy()
     matrix = np.transpose(matrix)
     return matrix
-    
-x, residuals, rank, s = np.linalg.lstsq(load_ingredients("FoodData_Central_foundation_food_json_2026-04-30/smoothie_model_ready.csv",ingredient), target_matrix, rcond=None)
-x_nnls, residual = nnls(load_ingredients("FoodData_Central_foundation_food_json_2026-04-30/smoothie_model_ready.csv",ingredient), target_matrix)
+
+current_matrix = load_ingredients("smoothie_model_ready.csv",ingredients)
+x, residuals, rank, s = np.linalg.lstsq(current_matrix, target_matrix, rcond=None)
+x_nnls, residual = nnls(current_matrix, target_matrix)
 ls = 1
 for i in x:
     if i < 0:
@@ -54,9 +71,12 @@ for i in x:
         break
 if ls:
     print("USing LS")
-    
-    print_result(list(x),residuals,"FoodData_Central_foundation_food_json_2026-04-30/smoothie_model_ready.csv",ingredient)
+    list_residuals = list(residuals)
+    if len(list_residuals) <= 0:
+        list_residuals.append(0)
+
+    print_result(list(x),list_residuals[0],"smoothie_model_ready.csv",ingredients)
 else:
     print("USing NNLS")
     
-    print_result(list(x_nnls),residual,"FoodData_Central_foundation_food_json_2026-04-30/smoothie_model_ready.csv",ingredient)
+    print_result(list(x_nnls),residual,"smoothie_model_ready.csv",ingredients)
