@@ -3,6 +3,7 @@ Smoothie Recipe Calculator - web interface.
 Run:   python app.py        then open  http://127.0.0.1:5000
 """
 import os
+import re
 import subprocess
 import sys
 
@@ -61,8 +62,10 @@ def parse_output(out):
     section = None
     for l in lines:
         s = l.strip()
-        if s.startswith("USing "):
-            res["method"] = s.replace("USing", "").strip()
+        # With piped stdin, input() prompts and the method share one stdout line.
+        method_match = re.search(r"\busing\s+(\S+)\s*$", s, re.IGNORECASE)
+        if method_match:
+            res["method"] = method_match.group(1)
         elif s.startswith("Ingredient_List"):
             section = "list"
         elif s.startswith("Error :"):
