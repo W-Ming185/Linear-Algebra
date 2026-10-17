@@ -1,5 +1,5 @@
 import numpy as np
-from scipy.optimize import nnls
+from scipy.optimize import lsq_linear
 import pandas as pd
 protein = float(input("Enter protein : "))
 carb = float(input("Enter carb : "))
@@ -7,6 +7,7 @@ fats = float(input("Enter fats : "))
 fiber = float(input("Enter fiber : "))
 target_matrix = [protein,carb,fats,fiber]
 ingredients = [0]
+min_bounds = []
 
 while True:
     Input = input("Enter your ingredient (type exit to exit) : ")
@@ -18,8 +19,14 @@ while True:
             break
     if int(Input) in ingredients:
         print("Already have those ingredient!")
+        
         continue
-
+    while True:
+        min_g = input(f"Enter minimum amount for ingredient {Input} (g) : ")
+        if min_g is not None and min_g.isdigit():
+            break
+        print("Try again.")
+    min_bounds.append(float(min_g)/100.00)
     ingredients.append(int(Input))
 
 def print_result(x,error,path,ingredient):
@@ -58,29 +65,16 @@ def load_ingredients(path,ingredient_list):
     df = pd.read_csv(path, sep=',',skiprows=lambda x: x not in ingredient_list)
     # .iloc[:, 1:] means "keep all rows (:), and keep columns from index 1 to the end"
     df = df.iloc[:, 2:6]
-    print(df)
+    # print(df)
     matrix = df.to_numpy()
     matrix = np.transpose(matrix)
     return matrix
 
+lb = np.array(min_bounds)
 current_matrix = load_ingredients("smoothie_model_ready.csv",ingredients)
-print(current_matrix)
-x, residuals, rank, s = np.linalg.lstsq(current_matrix, target_matrix, rcond=None)
+result = lsq_linear(current_matrix, target_matrix, bounds=(lb, np.inf))
 
-ls = 1
-for i in x:
-    if i < 0:
-        ls = 0
-        break 
-if ls:
-    print("USing LS")
-    list_residuals = list(residuals)
-    if len(list_residuals) <= 0:
-        list_residuals.append(0)
+error = np.sum(result.fun ** 2)
+print("USing LS")
 
-    print_result(list(x),list_residuals[0],"smoothie_model_ready.csv",ingredients)
-else:
-    x_nnls, residual = nnls(current_matrix, target_matrix)
-    print("USing NNLS")
-    
-    print_result(list(x_nnls),residual**2,"smoothie_model_ready.csv",ingredients)
+print_result(list(result.x), error, "smoothie_model_ready.csv", ingredients)

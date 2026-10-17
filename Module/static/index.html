@@ -71,10 +71,11 @@
                     <thead class="bg-slate-100 text-slate-600 sticky top-0 border-b border-slate-200">
                         <tr>
                             <th class="px-5 py-3 font-medium">Ingredient</th>
-                            <th class="px-5 py-3 font-medium text-right">Protein (/100g)</th>
-                            <th class="px-5 py-3 font-medium text-right">Carb (/100g)</th>
-                            <th class="px-5 py-3 font-medium text-right">Fat (/100g)</th>
-                            <th class="px-5 py-3 font-medium text-right">Fiber (/100g)</th>
+                            <th class="px-4 py-3 font-medium text-right">Protein (/100g)</th>
+                            <th class="px-4 py-3 font-medium text-right">Carb (/100g)</th>
+                            <th class="px-4 py-3 font-medium text-right">Fat (/100g)</th>
+                            <th class="px-4 py-3 font-medium text-right">Fiber (/100g)</th>
+                            <th class="px-4 py-3 font-medium text-right">Min Amount (g)</th>
                             <th class="px-3 py-3"></th>
                         </tr>
                     </thead>
@@ -138,7 +139,7 @@
 
                 <div class="mt-auto">
                     <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider mb-4 border-b border-slate-100 pb-2">Nutrition Summary</h3>
-                    <<div class="grid grid-cols-2 md:grid-cols-6 gap-4">
+                    <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
                         <div class="bg-slate-50 rounded-lg p-4 flex flex-col items-center justify-center border border-slate-100">
                             <span class="text-xs font-medium text-slate-500 mb-1">Calories (kcal)</span>
                             <span id="outCal" class="text-xl font-bold text-slate-900">0</span>
@@ -176,15 +177,32 @@
 
     <script>
         let DB = [];
-        let chosen = [];   // ingredient objects, in the order added
-        let picked = null; // item currently highlighted from suggestions
+        let chosen = [];   // เก็บวัตถุดิบที่เลือก พร้อมค่า min_g
+        let picked = null;
+        let API_BASE = '';
 
         const $ = id => document.getElementById(id);
-        const elInput = $('ingName'), elSuggest = $('suggest');
+        const elInput = $('ingName'), elSuggest =$('suggest');
 
         const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 
-        fetch('/api/ingredients').then(r => r.json()).then(d => { DB = d; });
+        async function loadIngredients() {
+            try {
+                const r = await fetch('/api/ingredients');
+                if (!r.ok) throw new Error('Not on Flask port');
+                DB = await r.json();
+            } catch (e) {
+                try {
+                    API_BASE = 'http://127.0.0.1:5000';
+                    const r2 = await fetch(API_BASE + '/api/ingredients');
+                    if (!r2.ok) throw new Error('Flask server not reachable');
+                    DB = await r2.json();
+                } catch (e2) {
+                    $('addMsg').textContent = 'Cannot load ingredients. Run "python app.py" and open http://127.0.0.1:5000';
+                }
+            }
+        }
+        loadIngredients();
 
         function showSuggestions() {
             const q = elInput.value.trim().toLowerCase();
@@ -203,6 +221,7 @@
 
         elInput.addEventListener('input', showSuggestions);
         elInput.addEventListener('keydown', e => { if (e.key === 'Enter') addIngredient(); });
+        
         elSuggest.addEventListener('mousedown', e => {
             const el = e.target.closest('.sg');
             if (!el) return;
@@ -212,6 +231,7 @@
             picked = item;
             elSuggest.classList.add('hidden');
         });
+
         document.addEventListener('click', e => {
             if (!elSuggest.contains(e.target) && e.target !== elInput) elSuggest.classList.add('hidden');
         });
@@ -228,7 +248,9 @@
                 else { msg.textContent = hits.length ? 'Several matches - pick one from the list.' : 'No ingredient found with that name.'; return; }
             }
             if (chosen.some(c => c.id === item.id)) { msg.textContent = 'Already have that ingredient!'; return; }
-            chosen.push(item);
+            
+            // เพิ่มวัตถุดิบลงลิสต์ โดยตั้งต้น min_g เป็น 0
+            chosen.push({ ...item, min_g: 0 });
             elInput.value = ''; picked = null; elSuggest.classList.add('hidden');
             renderInputList();
         }
@@ -236,19 +258,32 @@
 
         function removeIngredient(id) { chosen = chosen.filter(c => c.id !== id); renderInputList(); }
 
+        // ฟังก์ชันอัปเดตค่าขั้นต่ำเมื่อผู้ใช้พิมพ์เปลี่ยนในตาราง
+        window.updateMinG = function(id, val) {
+            const item = chosen.find(c => c.id === id);
+            if (item) {
+                item.min_g = Math.max(0, Math.round(parseFloat(val) || 0));
+            }
+        };
+
         function renderInputList() {
             const tb = $('inputTableBody');
             if (!chosen.length) {
-                tb.innerHTML = '<tr><td colspan="6" class="px-5 py-8 text-center text-slate-400 italic">No ingredients added yet.</td></tr>';
+                tb.innerHTML = '<tr><td colspan="7" class="px-5 py-8 text-center text-slate-400 italic">No ingredients added yet.</td></tr>';
                 return;
             }
             tb.innerHTML = chosen.map(i => `
                 <tr>
                     <td class="px-5 py-3 font-medium text-slate-700 whitespace-normal">${esc(i.name)}</td>
-                    <td class="px-5 py-3 text-right">${i.protein}</td>
-                    <td class="px-5 py-3 text-right">${i.carb}</td>
-                    <td class="px-5 py-3 text-right">${i.fat}</td>
-                    <td class="px-5 py-3 text-right">${i.fiber}</td>
+                    <td class="px-4 py-3 text-right">${i.protein}</td>
+                    <td class="px-4 py-3 text-right">${i.carb}</td>
+                    <td class="px-4 py-3 text-right">${i.fat}</td>
+                    <td class="px-4 py-3 text-right">${i.fiber}</td>
+                    <td class="px-4 py-2 text-right">
+                        <input type="number" min="0" step="1" value="${i.min_g}"
+                            oninput="updateMinG(${i.id}, this.value)"
+                            class="w-20 border border-slate-200 rounded px-2 py-1 text-right text-sm focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none">
+                    </td>
                     <td class="px-3 py-3 text-right"><button onclick="removeIngredient(${i.id})" class="text-slate-400 hover:text-red-600 text-lg leading-none" title="Remove">&times;</button></td>
                 </tr>`).join('');
         }
@@ -256,7 +291,7 @@
 
         async function calculateRecipe() {
             const msg = $('calcMsg'); msg.textContent = '';
-            const vals = { protein: $('tProtein').value, carb: $('tCarb').value, fat: $('tFat').value, fiber: $('tFiber').value };
+            const vals = { protein: $('tProtein').value, carb:$('tCarb').value, fat: $('tFat').value, fiber:$('tFiber').value };
             for (const k in vals) {
                 if (vals[k] === '' || isNaN(+vals[k]) || +vals[k] < 0) { msg.textContent = 'Please fill in all four targets with numbers (0 or more).'; return; }
             }
@@ -264,9 +299,12 @@
 
             const btn = $('calcBtn'); btn.disabled = true; $('calcLabel').textContent = 'Calculating...';
             try {
-                const r = await fetch('/api/solve', {
+                const r = await fetch(API_BASE + '/api/solve', {
                     method: 'POST', headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ ...vals, ids: chosen.map(c => c.id) })
+                    body: JSON.stringify({
+                        ...vals,
+                        items: chosen.map(c => ({ id: c.id, min_g: c.min_g }))
+                    })
                 });
                 const d = await r.json();
                 if (!d.ok) { msg.textContent = d.error + (d.detail ? ' ' + d.detail.split('\n').filter(Boolean).pop() : ''); return; }
@@ -290,15 +328,13 @@
                 </tr>`;
             }).join('');
             const t = d.totals;
-            $('totalVolume').textContent = total.toFixed(2)
-            $('outCal').textContent = Math.round(t.kcal ?? 0);
+            $('totalVolume').textContent = total.toFixed(2);$('outCal').textContent = Math.round(t.kcal ?? 0);
             $('outPro').textContent = (t.protein ?? 0).toFixed(1);
             $('outCarb').textContent = (t.carb ?? 0).toFixed(1);
             $('outFat').textContent = (t.fat ?? 0).toFixed(1);
             $('outFiber').textContent = (t.fiber ?? 0).toFixed(1);
             $('outPrice').textContent = (t.price ?? 0).toFixed(2);
-            $('outMethod').textContent = d.method === 'LS' ? 'Least squares (LS)' : d.method === 'NNLS' ? 'Non-negative LS (NNLS)' : (d.method || '-');
-            $('outError').textContent = d.error || '-';
+            $('outMethod').textContent = d.method === 'LS' ? 'Bounded Least Squares (LS)' : d.method === 'NNLS' ? 'Non-negative LS (NNLS)' : (d.method \vert{}\vert{} '-');$('outError').textContent = d.error || '-';
         }
     </script>
 </body>

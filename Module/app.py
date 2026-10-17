@@ -1,10 +1,5 @@
 """
 Smoothie Recipe Calculator - web interface.
-
-The solver (solver.py) is your friend's script, untouched. This app simply
-"types" the answers into it (targets, ingredient numbers, "exit") exactly as
-a person would at the console, then reads what it prints and shows it nicely.
-
 Run:   python app.py        then open  http://127.0.0.1:5000
 """
 import os
@@ -15,10 +10,17 @@ import pandas as pd
 from flask import Flask, jsonify, request, send_from_directory
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-CSV = os.path.join(BASE, 
-                   "smoothie_model_ready.csv")
+CSV = os.path.join(BASE, "smoothie_model_ready.csv")
 
 app = Flask(__name__, static_folder=os.path.join(BASE, "static"))
+
+
+@app.after_request
+def add_cors_headers(response):
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    return response
 
 
 def load_db():
@@ -26,8 +28,6 @@ def load_db():
     items = []
     for i, row in df.iterrows():
         items.append({
-            # The solver picks ingredients by line number in the file
-            # (line 0 = header), so the first food is number 1.
             "id": int(i) + 1,
             "name": str(row.iloc[1]),
             "protein": float(row.iloc[2]),
@@ -44,7 +44,10 @@ DB = load_db()
 
 @app.route("/")
 def index():
-    return send_from_directory(app.static_folder, "index.html")
+    static_index = os.path.join(app.static_folder, "index.html")
+    if os.path.exists(static_index):
+        return send_from_directory(app.static_folder, "index.html")
+    return send_from_directory(BASE, "index.html")
 
 
 @app.route("/api/ingredients")
@@ -89,25 +92,45 @@ def parse_output(out):
     return res
 
 
-@app.route("/api/solve", methods=["POST"])
+@app.route("/api/solve", methods=["POST", "OPTIONS"])
 def solve():
+    if request.method == "OPTIONS":
+        return jsonify({"ok": True})
+        
     data = request.get_json(force=True)
     try:
         targets = [float(data[k]) for k in ("protein", "carb", "fat", "fiber")]
-        ids = []
-        for i in data["ids"]:
-            i = int(i)
-            if i < 1 or i > len(DB):
-                raise ValueError(f"Unknown ingredient number {i}")
-            if i not in ids:
-                ids.append(i)
-        if not ids:
+        raw_items = data.get("items", [])
+        
+        seen = set()
+        valid_items = []
+        for it in raw_items:
+            ing_id = int(it["id"])
+            min_g = int(round(float(it.get("min_g", 0))))
+            if ing_id < 1 or ing_id > len(DB):
+                raise ValueError(f"Unknown ingredient number {ing_id}")
+            if min_g < 0:
+                raise ValueError("Minimum amount cannot be negative.")
+            if ing_id not in seen:
+                seen.add(ing_id)
+                valid_items.append((ing_id, min_g))
+                
+        if not valid_items:
             raise ValueError("Pick at least one ingredient.")
+            
+        # เรียงลำดับ id จากน้อยไปมากให้ตรงกับที่ solver.py อ่าน CSV
+        valid_items.sort(key=lambda x: x[0])
+        
     except (KeyError, ValueError, TypeError) as e:
         return jsonify({"ok": False, "error": f"Invalid input: {e}"}), 400
 
-    # Exactly what a person would type into the original script
-    typed = "\n".join([str(t) for t in targets] + [str(i) for i in ids] + ["exit"]) + "\n"
+    typed_lines = [str(t) for t in targets]
+    for ing_id, min_g in valid_items:
+        typed_lines.append(str(ing_id))
+        typed_lines.append(str(min_g))
+    typed_lines.append("exit")
+    
+    typed = "\n".join(typed_lines) + "\n"
 
     env = dict(os.environ, PYTHONIOENCODING="utf-8")
     try:
@@ -127,4 +150,4 @@ def solve():
 
 
 if __name__ == "__main__":
-    app.run(debug=False, port=5000)
+    app.run(debug=True, port=5000)
