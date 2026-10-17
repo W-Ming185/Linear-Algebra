@@ -334,7 +334,7 @@
             $('outFat').textContent = (t.fat ?? 0).toFixed(1);
             $('outFiber').textContent = (t.fiber ?? 0).toFixed(1);
             $('outPrice').textContent = (t.price ?? 0).toFixed(2);
-            $('outMethod').textContent = d.method === 'LS' ? 'Bounded Least Squares (LS)' : d.method === 'NNLS' ? 'Non-negative LS (NNLS)' : (d.method \vert{}\vert{} '-');$('outError').textContent = d.error || '-';
+            $('outMethod').textContent = d.method === 'LS' ? 'Bounded Least Squares (LS)' : d.method === 'NNLS' ? 'Non-negative LS (NNLS)' : (d.method || '-');$('outError').textContent = d.error || '-';
         }
     </script>
 </body>
