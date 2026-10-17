@@ -286,7 +286,7 @@
                 </tr>`;
             }).join('');
             const t = d.totals;
-            $('totalVolume').textContent = Math.round(total);
+            $('totalVolume').textContent = total.toFixed(2)
             $('outCal').textContent = Math.round(t.kcal ?? 0);
             $('outPro').textContent = (t.protein ?? 0).toFixed(1);
             $('outCarb').textContent = (t.carb ?? 0).toFixed(1);

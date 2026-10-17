@@ -63,12 +63,12 @@ def load_ingredients(path,ingredient_list):
 
 current_matrix = load_ingredients("smoothie_model_ready.csv",ingredients)
 x, residuals, rank, s = np.linalg.lstsq(current_matrix, target_matrix, rcond=None)
-x_nnls, residual = nnls(current_matrix, target_matrix)
+
 ls = 1
 for i in x:
     if i < 0:
         ls = 0
-        break
+        break 
 if ls:
     print("USing LS")
     list_residuals = list(residuals)
@@ -77,6 +77,7 @@ if ls:
 
     print_result(list(x),list_residuals[0],"smoothie_model_ready.csv",ingredients)
 else:
+    x_nnls, residual = nnls(current_matrix, target_matrix)
     print("USing NNLS")
     
     print_result(list(x_nnls),residual,"smoothie_model_ready.csv",ingredients)
