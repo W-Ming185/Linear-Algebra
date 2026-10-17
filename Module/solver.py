@@ -22,16 +22,16 @@ while True:
 
     ingredients.append(int(Input))
 
-
 def print_result(x,error,path,ingredient):
-    df = pd.read_csv(path, sep='\t',skiprows=lambda x: x not in ingredient)
-    df = df.iloc[:, 1:7]
+    df = pd.read_csv(path, sep=',',skiprows=lambda x: x not in ingredient)
+    df = df.iloc[:, 1:8]
     
     total_protein = 0
     total_carb = 0
     total_fat = 0
     total_fiber = 0
     total_energy = 0
+    total_price = 0
     print("Ingredient_List : ")
     for i in range(len(x)):
         name = df.iloc[i, 0]
@@ -42,6 +42,7 @@ def print_result(x,error,path,ingredient):
         total_fat += weight*df.iloc[i,3]
         total_fiber += weight*df.iloc[i,4]
         total_energy += weight*df.iloc[i,5]
+        total_price += round(weight*100,2)*df.iloc[i,6]
     print(f"Error : {np.round(error,3)}")
     print()
     print("Total :")
@@ -50,10 +51,11 @@ def print_result(x,error,path,ingredient):
     print(f"Total Fat : {round(total_fat,2)} g")
     print(f"Total_Fibre : {round(total_fiber,2)} g")
     print(f"Total_Energy : {round(total_energy,2)} kcal")
+    print(f"Total_Price : {round(total_price,2)} Baht")
 
 def load_ingredients(path,ingredient_list):
     #matrix = np.genfromtxt(path, delimiter=',', skip_header=1, usecols=(1, 2, 3, 4))
-    df = pd.read_csv(path, sep='\t',skiprows=lambda x: x not in ingredient_list)
+    df = pd.read_csv(path, sep=',',skiprows=lambda x: x not in ingredient_list)
     # .iloc[:, 1:] means "keep all rows (:), and keep columns from index 1 to the end"
     df = df.iloc[:, 2:6]
     print(df)
@@ -62,6 +64,7 @@ def load_ingredients(path,ingredient_list):
     return matrix
 
 current_matrix = load_ingredients("smoothie_model_ready.csv",ingredients)
+print(current_matrix)
 x, residuals, rank, s = np.linalg.lstsq(current_matrix, target_matrix, rcond=None)
 
 ls = 1
