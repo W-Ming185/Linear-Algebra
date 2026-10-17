@@ -83,4 +83,4 @@ else:
     x_nnls, residual = nnls(current_matrix, target_matrix)
     print("USing NNLS")
     
-    print_result(list(x_nnls),residual,"smoothie_model_ready.csv",ingredients)
+    print_result(list(x_nnls),residual**2,"smoothie_model_ready.csv",ingredients)

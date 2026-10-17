@@ -22,7 +22,7 @@ app = Flask(__name__, static_folder=os.path.join(BASE, "static"))
 
 
 def load_db():
-    df = pd.read_csv(CSV, sep="\t")
+    df = pd.read_csv(CSV, sep=",")
     items = []
     for i, row in df.iterrows():
         items.append({
@@ -84,6 +84,8 @@ def parse_output(out):
                 res["totals"]["fiber"] = num
             elif "energy" in k:
                 res["totals"]["kcal"] = num
+            elif "price" in k:
+                res["totals"]["price"] = num
     return res
 
 
