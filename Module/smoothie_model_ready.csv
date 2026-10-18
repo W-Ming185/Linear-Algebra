@@ -1,0 +1,201 @@
+ingredient_id,name_en,protein_g_100g,carbohydrate_g_100g,fat_g_100g,fiber_g_100g,energy_kcal_100g,price_thb_g
+FDC_1750340,"Apples, fuji, with skin, raw",0.148,15.7,0.162,2.08,58.2,0.058641975
+FDC_1750341,"Apples, gala, with skin, raw",0.133,14.8,0.15,2.11,54.9,0.048765432
+FDC_1750342,"Apples, granny smith, with skin, raw",0.266,14.1,0.138,2.51,53,0.091975309
+FDC_1750343,"Apples, honeycrisp, with skin, raw",0.102,14.7,0.1,1.72,54,0.067663818
+FDC_168202,"Apples, raw, golden delicious, with skin",0.28,13.6,0.15,2.4,57,0.071225071
+FDC_1750339,"Apples, red delicious, with skin, raw",0.188,14.8,0.212,2.04,55.6,0.07518202
+FDC_2710815,"Apricot, with skin, raw",0.961,10.2,0.405,1.51,43.5,0.099
+FDC_171705,"Avocados, raw, all commercial varieties",2,8.53,14.7,6.7,160,0.127142857
+FDC_1105073,"Bananas, overripe, raw",0.73,20.1,0.22,1.7,85,0.061965812
+FDC_1105314,"Bananas, ripe and slightly ripe, raw",0.74,23,0.29,1.7,97,0.061965812
+FDC_173946,"Blackberries, raw",1.39,9.61,0.49,5.3,43,0.067663818
+FDC_171711,"Blueberries, raw",0.74,14.5,0.33,2.4,57,0.548979592
+FDC_171715,"Carambola, (starfruit), raw",1.04,6.73,0.33,2.8,31,0.052631579
+FDC_173954,"Cherries, sour, red, raw",1,12.2,0.3,1.6,50,0.058823529
+FDC_171719,"Cherries, sweet, raw",1.06,16,0.2,2.1,63,0.780434783
+FDC_168195,"Clementines, raw",0.85,12,0.15,1.7,47,0.06
+FDC_168192,"Durian, raw or frozen",1.47,27.1,5.33,3.8,147,0.15
+FDC_746768,"Figs, dried, uncooked",3.3,63.9,0.92,9.8,249,0.368
+FDC_173021,"Figs, raw",0.75,19.2,0.3,2.9,74,0.1472
+FDC_325287,"Grapefruit juice, white, canned or bottled, unsweetened",0.55,7.59,0.7,0.2,37,0.076333333
+FDC_174683,"Grapes, red or green (European type, such as Thompson seedless), raw",0.72,18.1,0.16,0.9,69,0.072631579
+FDC_173044,"Guavas, common, raw",2.55,14.3,0.95,5.4,68,0.072631579
+FDC_174687,"Jackfruit, raw",1.72,23.2,0.64,1.5,95,0.185840708
+FDC_2710831,"Kiwifruit (kiwi), green, peeled, raw",1.01,13.8,0.64,2.13,58.5,0.275
+FDC_168154,"Kumquats, raw",1.88,15.9,0.86,6.5,71,0.115294118
+FDC_167746,"Lemons, raw, without peel",1.1,9.32,0.3,2.8,29,0.253205128
+FDC_168155,"Limes, raw",0.7,10.5,0.2,2.8,30,0.141025641
+FDC_169086,"Litchis, raw",0.83,16.5,0.44,1.3,66,0.165
+FDC_169089,"Longans, raw",1.31,15.1,0.1,1.1,60,0.143636364
+FDC_2710832,"Mandarin, seedless, peeled, raw",1.04,13.4,0.458,1.33,55.6,0.119
+FDC_2710834,"Mango, Ataulfo, peeled, raw",0.688,17.4,0.681,1.29,70.6,0.189
+FDC_2710833,"Mango, Tommy Atkins, peeled, raw",0.562,15.3,0.572,1.75,61.6,0.05
+FDC_746770,"Melons, cantaloupe, raw",0.82,8.16,0.18,0.8,34,0.114545455
+FDC_169093,"Melons, casaba, raw",1.11,6.58,0.1,0.9,28,0.085
+FDC_169911,"Melons, honeydew, raw",0.54,9.09,0.14,0.8,36,0.069411765
+FDC_169913,"Mulberries, raw",1.44,9.8,0.39,1.7,43,0.089
+FDC_327357,"Nectarines, raw",1.06,9.18,0.28,1.5,39,0.363636364
+FDC_746771,"Oranges, raw, navels",0.91,11.8,0.15,2,47,0.094520548
+FDC_169926,"Papayas, raw",0.47,10.8,0.26,1.7,43,0.146153846
+FDC_169108,"Passion-fruit, (granadilla), purple, raw",2.2,23.4,0.7,10.4,97,0.179
+FDC_325430,"Peaches, yellow, raw",0.91,10.1,0.27,1.5,42,0.079
+FDC_2710836,"Pear, Anjou, green, with skin, raw",0.312,14.8,0.371,2.64,57.3,0.218181818
+FDC_168177,"Pears, asian, raw",0.5,10.6,0.23,3.6,42,0.057647059
+FDC_746773,"Pears, raw, bartlett",0.38,15.1,0.16,3.1,57,0.065555556
+FDC_169941,"Persimmons, japanese, raw",0.58,18.6,0.19,3.6,70,0.450980392
+FDC_2346398,"Pineapple, raw",0.461,14.1,0.211,0.935,54,0.065333333
+FDC_2710837,"Plum, black, with skin, raw",0.578,13.5,0.282,1.35,52.7,0.049
+FDC_167754,"Pummelo, raw",0.76,9.62,0.04,1,38,0.131851852
+FDC_167755,"Raspberries, raw",1.2,11.9,0.65,6.5,52,1.297959184
+FDC_167759,"Sapodilla, raw",0.44,20,1.1,5.3,83,0.103913043
+FDC_167760,"Sapote, mamey, raw",1.45,32.1,0.46,5.4,124,0.4144
+FDC_167761,"Soursop, raw",1,16.8,0.3,3.3,66,0.077631579
+FDC_167762,"Strawberries, raw",0.67,7.68,0.3,2,32,0.711578947
+FDC_168175,"Sugar-apples, (sweetsop), raw",2.06,23.6,0.29,4.4,94,1.036
+FDC_167763,"Tamarinds, raw",2.8,62.5,0.6,5.1,239,0.218
+FDC_167765,"Watermelon, raw",0.61,7.55,0.15,0.4,30,0.049090909
+FDC_173945,"Bananas, dehydrated, or banana powder",3.89,88.3,1.81,9.9,346,0.105
+FDC_171710,"Blackberries, frozen, unsweetened",1.18,15.7,0.43,5,64,0.051578947
+FDC_173950,"Blueberries, frozen, unsweetened (Includes foods for USDA's Food Distribution Program)",0.42,12.2,0.64,2.7,51,0.189
+FDC_171713,"Boysenberries, frozen, unsweetened",1.1,12.2,0.26,5.3,50,0.069005848
+FDC_171718,"Cherries, sour, red, frozen, unsweetened (Includes foods for USDA's Food Distribution Program)",0.92,11,0.44,1.6,46,0.055
+FDC_171723,"Cranberries, dried, sweetened (Includes foods for USDA's Food Distribution Program)",0.17,82.8,1.09,5.3,308,0.42
+FDC_171726,"Dates, deglet noor",2.45,75,0.39,8,282,0.305555556
+FDC_168191,"Dates, medjool",1.81,75,0.15,6.7,277,1.328888889
+FDC_173032,"Goji berries, dried",14.3,77.1,0.39,13,349,0.433333333
+FDC_169942,"Persimmons, japanese, dried",1.38,73.4,0.59,14.5,274,0.096842105
+FDC_168162,"Plums, dried (prunes), uncooked",2.18,63.9,0.38,7.1,240,0.239
+FDC_168165,"Raisins, dark, seedless (Includes foods for USDA's Food Distribution Program)",3.3,79.3,0.25,4.5,299,0.139
+FDC_168164,"Raisins, golden, seedless",3.28,80,0.2,3.3,301,0.218061674
+FDC_168209,"Raspberries, frozen, red, unsweetened",1.15,12.6,0.81,4.3,56,0.268
+FDC_168173,"Strawberries, frozen, unsweetened (Includes foods for USDA's Food Distribution Program)",0.43,9.13,0.11,2.1,35,0.075
+FDC_173933,"Apple juice, canned or bottled, unsweetened, without added ascorbic acid",0.1,11.3,0.13,0.2,46,0.079
+FDC_168117,"Cranberry juice, unsweetened",0.39,12.2,0.13,0.1,46,0.076
+FDC_173042,"Grape juice, canned or bottled, unsweetened, without added ascorbic acid",0.37,14.8,0.13,0.2,60,0.046666667
+FDC_167747,"Lemon juice, raw",0.35,6.9,0.24,0.3,22,0.411458333
+FDC_168156,"Lime juice, raw",0.42,8.42,0.07,0.4,25,0.261904762
+FDC_169098,"Orange juice, raw (Includes foods for USDA's Food Distribution Program)",0.7,10.4,0.2,0.2,45,0.153333333
+FDC_169109,"Passion-fruit juice, purple, raw",0.39,13.6,0.05,0.2,51,0.189
+FDC_169947,"Pineapple juice, canned or bottled, unsweetened, without added ascorbic acid",0.36,12.9,0.12,0.2,53,0.080756014
+FDC_167787,"Pomegranate juice, bottled",0.15,13.1,0.29,0.1,54,0.006805556
+FDC_167753,"Prune juice, canned",0.61,17.4,0.03,1,71,0.311839323
+FDC_172179,"Cheese, cottage, creamed, large or small curd",11.1,3.38,4.3,0,98,0.3225
+FDC_173417,"Cheese, cottage, lowfat, 1% milkfat",12.4,2.72,1.02,0,72,0.217777778
+FDC_172182,"Cheese, cottage, lowfat, 2% milkfat",10.4,4.76,2.27,0,81,0.318
+FDC_172181,"Cheese, cottage, nonfat, uncreamed, dry, large or small curd",10.3,6.66,0.29,0,72,0.725
+FDC_171248,"Cheese, ricotta, part skim milk",11.4,5.14,7.91,0,138,0.74
+FDC_170851,"Cheese, ricotta, whole milk",7.54,7.27,10.2,0,150,0.1475
+FDC_170859,"Cream, fluid, heavy whipping",2.84,2.84,36.1,0,340,0.239
+FDC_170874,"Milk, buttermilk, fluid, cultured, lowfat",3.31,4.79,1.07,0,40,0.091475984
+FDC_171275,"Milk, canned, condensed, sweetened",7.91,54.4,8.7,0,321,0.073239437
+FDC_171276,"Milk, canned, evaporated, with added vitamin D and without added vitamin A",6.81,10,7.56,0,134,0.066666667
+FDC_171272,"Milk, dry, nonfat, instant, with added vitamin A and vitamin D",35.1,52.2,0.72,0,358,0.48
+FDC_170876,"Milk, dry, whole, with added vitamin D",26.3,38.4,26.7,0,496,0.285
+FDC_170872,"Milk, lowfat, fluid, 1% milkfat, with added vitamin A and vitamin D",3.37,4.99,0.97,0,42,0.355670103
+FDC_171269,"Milk, nonfat, fluid, with added vitamin A and vitamin D (fat free or skim)",3.37,4.96,0.08,0,34,0.123214286
+FDC_171267,"Milk, reduced fat, fluid, 2% milkfat, with added vitamin A and vitamin D",3.3,4.8,1.98,0,50,0.385309278
+FDC_171265,"Milk, whole, 3.25% milkfat, with added vitamin D",3.15,4.8,3.25,0,61,0.05
+FDC_170903,"Yogurt, Greek, plain, lowfat",9.95,3.94,1.92,0,73,0.318
+FDC_170894,"Yogurt, Greek, plain, nonfat (Includes foods for USDA's Food Distribution Program)",10.2,3.6,0.39,0,59,0.329658214
+FDC_171304,"Yogurt, Greek, plain, whole milk",9,3.98,5,0,97,0.38
+FDC_330415,"Yogurt, Greek, strawberry, nonfat",8.06,12.2,0.15,0.6,83,0.104
+FDC_170886,"Yogurt, plain, low fat",5.25,7.04,1.55,0,63,0.122222222
+FDC_170887,"Yogurt, plain, skim milk",5.73,7.68,0.18,0,56,1.042281666
+FDC_171284,"Yogurt, plain, whole milk",3.47,4.66,3.25,0,61,0.147777778
+FDC_2257045,"Almond milk, unsweetened, plain, refrigerated",0.656,0.671,1.56,0,19.3,0.113684211
+FDC_1999631,"Almond milk, unsweetened, plain, shelf stable",0.555,0.337,1.22,0,14.6,0.12
+FDC_170172,"Nuts, coconut milk, raw (liquid expressed from grated meat and water)",2.29,5.54,23.8,2.2,230,0.07
+FDC_170174,"Nuts, coconut water (liquid from coconuts)",0.72,3.71,0.2,1.1,19,0.106666667
+FDC_2257046,"Oat milk, unsweetened, plain, refrigerated",0.797,5.1,2.75,0,48.3,0.129
+FDC_2257044,"Soy milk, sweetened, plain, refrigerated",2.78,3,1.96,0,40.7,0.032777778
+FDC_1999630,"Soy milk, unsweetened, plain, shelf stable",3.55,1.29,2.12,0,38.5,0.038
+FDC_2262074,"Almond butter, creamy",20.8,21.2,53,9.72,603,0.355670103
+FDC_2262075,"Flaxseed, ground",18,34.4,37.3,23.1,514,0.48
+FDC_323294,"Nuts, almonds, dry roasted, with salt added",20.4,16.2,57.8,11,620,0.944827586
+FDC_2346393,"Nuts, almonds, whole, raw",21.5,20,51.1,10.8,584,0.345
+FDC_2515373,"Nuts, brazilnuts, raw",15,21.6,57.4,5.98,621,1.025773196
+FDC_2515374,"Nuts, cashew nuts, raw",17.4,36.3,38.9,4.1,533,0.37375
+FDC_170170,"Nuts, coconut meat, dried (desiccated), not sweetened",6.88,23.6,64.5,16.3,660,0.27
+FDC_170169,"Nuts, coconut meat, raw",3.33,15.2,33.5,9,354,0.583505155
+FDC_2515375,"Nuts, hazelnuts or filberts, raw",13.5,26.5,53.5,8.41,602,0.566
+FDC_2515378,"Nuts, macadamia nuts, raw",7.79,24.1,64.9,7.56,669,0.995
+FDC_2346395,"Nuts, pecans, halves, raw",9.96,12.7,73.3,5.79,700,1.011013216
+FDC_2346392,"Nuts, pine nuts, raw",15.7,18.6,61.3,3.94,643,1.96
+FDC_2515379,"Nuts, pistachio nuts, raw",20.5,27.7,45,6.97,561,2.64
+FDC_2346394,"Nuts, walnuts, English, halves, raw",14.6,10.9,69.7,5.21,679,0.539
+FDC_2262072,"Peanut butter, creamy",24,22.7,49.4,6.32,589,0.27
+FDC_2515376,"Peanuts, raw",23.2,26.5,43.3,8.01,551,0.108
+FDC_170554,"Seeds, chia seeds, dried",16.5,42.1,30.7,34.4,486,1.022857143
+FDC_170148,"Seeds, hemp seed, hulled",31.6,8.67,48.8,4,553,0.2
+FDC_2515380,"Seeds, pumpkin seeds (pepitas), raw",29.9,18.7,40,5.08,515,0.404
+FDC_170150,"Seeds, sesame seeds, whole, dried",17.7,23.4,49.7,11.8,573,0.136
+FDC_170151,"Seeds, sesame seeds, whole, roasted and toasted",17,25.7,48,14,565,0.140206186
+FDC_170155,"Seeds, sunflower seed butter, without salt",17.3,23.3,55.2,5.7,617,0.246464646
+FDC_325524,"Seeds, sunflower seed kernels, dry roasted, with salt added",21,17.1,56.1,10.3,612,0.244
+FDC_2515381,"Seeds, sunflower seed, kernel, raw",18.9,24.5,48.4,7.22,571,0.416494845
+FDC_2262073,"Sesame butter, creamy",19.7,14.2,62.4,8.37,648,0.140206186
+FDC_173728,"Beans, adzuki, mature seeds, cooked, boiled, without salt",7.52,24.8,0.1,7.3,128,0.0344
+FDC_2644285,"Beans, black, canned, sodium added, drained and rinsed",6.91,19.8,1.27,6.69,115,0.0328
+FDC_2644287,"Beans, cannellini, canned, sodium added, drained and rinsed",7.41,18.8,1.17,6.76,112,0.315789474
+FDC_2644294,"Beans, great northern, canned, sodium added, drained and rinsed",7.03,19.3,1.27,6.91,114,0.189473684
+FDC_2644289,"Beans, kidney, dark red, canned, sodium added, sugar added, drained and rinsed",7.8,21,1.26,7.01,123,0.136842105
+FDC_2644290,"Beans, kidney, light red, canned, sodium added, sugar added, drained and rinsed",7.31,21.4,1.3,7.4,124,0.0136
+FDC_2644286,"Beans, navy, canned, sodium added, drained and rinsed",6.57,20,1.4,6.85,116,0.0348
+FDC_2644292,"Beans, pinto, canned, sodium added, drained and rinsed",6.69,19.6,1.27,7.09,114,0.074
+FDC_175203,"Beans, white, mature seeds, cooked, boiled, without salt",9.73,25.1,0.35,6.3,139,0.189473684
+FDC_2644293,"Blackeye pea, canned, sodium added, drained and rinsed",6.92,19.2,1.3,4.34,113,0.052
+FDC_2644288,"Chickpeas (garbanzo beans, bengal gram), canned, sodium added, drained and rinsed",7.02,20.3,3.1,5.92,133,0.228070175
+FDC_173757,"Chickpeas (garbanzo beans, bengal gram), mature seeds, cooked, boiled, without salt",8.86,27.4,2.59,7.6,164,0.0464
+FDC_172421,"Lentils, mature seeds, cooked, boiled, without salt",9.02,20.1,0.38,7.9,116,0.044
+FDC_174257,"Mung beans, mature seeds, cooked, boiled, without salt",7.02,19.2,0.38,7.6,105,0.0288
+FDC_2644291,"Peas, green, sweet, canned, sodium added, sugar added, drained and rinsed",4.73,12.7,1.15,5.95,77.8,0.057894737
+FDC_174271,"Soybeans, mature cooked, boiled, without salt",18.2,8.36,8.97,6,172,0.02173913
+FDC_172448,"Tofu, firm, prepared with calcium sulfate and magnesium chloride (nigari)",9.04,2.85,4.17,0.9,78,0.2
+FDC_172449,"Tofu, soft, prepared with calcium sulfate and magnesium chloride (nigari)",7.17,1.18,3.69,0.2,61,0.093333333
+FDC_170683,"Amaranth grain, cooked",3.8,18.7,1.58,2.1,102,0.595
+FDC_170285,"Barley, pearled, cooked",2.26,28.2,0.44,3.8,123,0.024666667
+FDC_170686,"Buckwheat groats, roasted, cooked",3.38,19.9,0.62,2.7,92,0.11
+FDC_170287,"Bulgur, cooked",3.08,18.6,0.24,4.5,83,0.116
+FDC_173905,"Cereals, oats, regular and quick, unenriched, cooked with water (includes boiling and microwaving), without salt",2.54,12,1.52,1.7,71,0.021
+FDC_168871,"Millet, cooked",3.51,23.7,1,1.3,119,0.0375
+FDC_168873,"Oat bran, cooked",3.21,11.4,0.86,2.6,40,0.367021277
+FDC_168917,"Quinoa, cooked",4.4,21.3,1.92,2.8,120,0.198333333
+FDC_169704,"Rice, brown, long-grain, cooked (Includes foods for USDA's Food Distribution Program)",2.74,25.6,0.97,1.6,123,0.0125
+FDC_169711,"Rice, white, glutinous, unenriched, cooked",2.02,21.1,0.19,1,97,0.015818182
+FDC_169146,"Beets, cooked, boiled, drained",1.68,9.96,0.18,2,44,0.080495356
+FDC_2685576,"Beets, raw",1.69,8.79,0.302,3.12,41,0.076470588
+FDC_747447,"Broccoli, raw",2.57,6.27,0.34,2.4,31,0.07375
+FDC_2258587,"Carrots, baby, raw",0.805,9.08,0.138,2.69,38.3,0.228070175
+FDC_170394,"Carrots, cooked, boiled, drained, without salt",0.76,8.22,0.18,3,35,0.01871345
+FDC_2258586,"Carrots, mature, raw",0.941,10.3,0.351,3.1,45,0.017777778
+FDC_2685573,"Cauliflower, raw",1.64,4.72,0.238,1.95,22.9,0.092
+FDC_169999,"Corn, sweet, yellow, cooked, boiled, drained, without salt",3.41,21,1.5,2.4,96,0.094736842
+FDC_169238,"Kale, cooked, boiled, drained, without salt",2.94,5.3,1.21,4,36,0.479302832
+FDC_323505,"Kale, raw",2.92,4.42,1.49,4.1,35,0.407407407
+FDC_746769,"Lettuce, cos or romaine, raw",1.24,3.24,0.26,1.8,17,0.322222222
+FDC_2258588,"Peppers, bell, green, raw",0.715,4.78,0.106,0.942,19.7,0.18627451
+FDC_2258591,"Peppers, bell, orange, raw",0.882,6.7,0.156,0.967,27.4,0.516339869
+FDC_2258590,"Peppers, bell, red, raw",0.896,6.65,0.126,1.16,27,0.18627451
+FDC_2258589,"Peppers, bell, yellow, raw",0.819,6.6,0.121,1.07,26.6,0.245098039
+FDC_168449,"Pumpkin, cooked, boiled, drained, without salt",0.72,4.9,0.07,1.1,20,0.063157895
+FDC_1999632,"Spinach, baby",2.85,2.41,0.619,1.56,20.7,0.055
+FDC_168463,"Spinach, cooked, boiled, drained, without salt",2.97,3.75,0.26,2.4,23,0.06875
+FDC_1999633,"Spinach, mature",2.91,2.64,0.604,1.59,21.6,0.161111111
+FDC_2685568,"Squash, summer, green, zucchini, includes skin, raw",0.984,3.27,0.205,0.752,16,0.114736842
+FDC_2685569,"Squash, summer, yellow, includes skin, raw",0.891,4.39,0.135,0.956,19,0.120775623
+FDC_169296,"Squash, winter, butternut, cooked, baked, without salt",0.9,10.5,0.09,3.2,40,0.1875
+FDC_168483,"Sweet potato, cooked, baked in skin, flesh, without salt",2.01,20.7,0.15,3.3,90,0.081944444
+FDC_1999634,"Tomato, roma",0.696,3.84,0.425,0.971,19,0.18556701
+FDC_321360,"Tomatoes, grape, raw",0.83,5.51,0.63,2.1,27,0.101030928
+FDC_2685578,"Tomatoes, whole, canned, solids and liquids, with salt added",0.868,4.29,0.206,0.872,19.1,0.16
+FDC_171477,"Chicken, broilers or fryers, breast, meat only, cooked, roasted",31,0,3.57,0,165,0.145333333
+FDC_171478,"Chicken, broilers or fryers, breast, meat only, cooked, stewed",29,0,3.03,0,151,0.13625
+FDC_169593,"Cocoa, dry powder, unsweetened",19.6,57.9,13.7,37,228,0.654867257
+FDC_169594,"Cocoa, dry powder, unsweetened, processed with alkali",18.1,58.3,13.1,29.8,220,0.704705882
+FDC_169640,Honey,0.3,82.4,0,0.2,304,0.383333333
+FDC_168820,Molasses,0,74.7,0.1,0,290,0.027
+FDC_171320,"Spices, cinnamon, ground",3.99,80.6,1.24,53.1,247,0.495
+FDC_170926,"Spices, ginger, ground",8.98,71.6,4.24,14.1,335,0.086666667
+FDC_168833,"Sugars, brown",0.12,98.1,0,0,380,0.045
+FDC_169661,"Syrups, maple",0.04,67,0.06,0,260,0.826666667
